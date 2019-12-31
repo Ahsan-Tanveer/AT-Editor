@@ -22,6 +22,9 @@ class ATEditor {
           <div class="at-paragraph_section"></div>
           <div class="at-misll_section"></div>
         </div>
+        <div class="at-text_sub_section at-sub"></div>
+        <div class="at-paragraph_sub_section at-sub"></div>
+        <div class="at-misll_sub_section at-sub"></div>
         <div class="at-wrapper">
           ${editable.outerHTML}
         </div>
@@ -36,7 +39,7 @@ class ATEditor {
         <button type="button" class="at-btnBold at-toolbarBtn" id="at-bold"></button>
         <button type="button" class="at-btnItalic at-toolbarBtn" id="at-italic"></button>
         <button type="button" class="at-btnUnderline at-toolbarBtn" id="at-underline"></button>
-        <button type="button" class="at-btnTextMore at-toolbarBtn" id="at-textMore"></button>
+        <button type="button" class="at-btnMore at-toolbarBtn" id="at-textMore"></button>
       </div>
     `);
   }
@@ -48,7 +51,7 @@ class ATEditor {
           <button type="button" class="at-btnleft at-toolbarBtn" id="at-left"></button>
           <button type="button" class="at-btnright at-toolbarBtn" id="at-right"></button>
           <button type="button" class="at-btncenter at-toolbarBtn" id="at-center"></button>
-          <button type="button" class="at-btnparagraphMore at-toolbarBtn" id="at-paragraphMore"></button>
+          <button type="button" class="at-btnMore at-toolbarBtn" id="at-paragraphMore"></button>
         </div>
       `);
     };
@@ -58,7 +61,6 @@ class ATEditor {
           <button type="button" class="at-btnOL at-toolbarBtn" id="at-ol"></button>
           <button type="button" class="at-btnLink at-toolbarBtn" id="at-link"></button>
           <button type="button" class="at-btnEmoji at-toolbarBtn" id="at-emoji"></button>
-          <button type="button" class="at-btnTextMore at-toolbarBtn" id="at-textMore"></button>
         </div>
       `);
     };
@@ -72,3 +74,16 @@ class ATEditor {
     }
   }
 }
+
+$(document).on('click', '.at-btnMore', function(){
+  let eleID = $(this).attr('id');
+  let subText = $('.at-text_sub_section');
+  let subParagraph = $('.at-paragraph_sub_section');
+  if(eleID === 'at-textMore'){
+    subParagraph.css('display') == 'block' && subParagraph.slideUp();
+    subText.slideToggle();
+  }else if(eleID === 'at-paragraphMore'){
+    subText.css('display') == 'block' && subText.slideUp();
+    subParagraph.slideToggle();
+  }
+});
