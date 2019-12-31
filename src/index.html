@@ -2,9 +2,21 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>AT-Editor</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/AT-Editor.css">
   </head>
   <body>
-    <p>AT-Editor</p>
+    <h1>AT-Editor</h1>
+    <div class="editor"></div>
+    <script src="./js/AT-Editor.js">
+    </script>
+    <script>
+      const editor = new ATEditor('.editor');
+      editor.toolbar({
+        paragraph: true,
+        misll: true
+      });
+    </script>
   </body>
 </html>
