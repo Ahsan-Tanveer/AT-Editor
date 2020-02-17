@@ -12,7 +12,9 @@
     <script src="./js/AT-Editor.js">
     </script>
     <script>
-      const editor = new ATEditor('.editor');
+      const editor = new ATEditor('.editor', {
+        placeholder: "Start Typing..."
+      });
       editor.toolbar({
         paragraph: true,
         misll: true
