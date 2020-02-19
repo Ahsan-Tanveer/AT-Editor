@@ -140,35 +140,35 @@
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1581922141/AT-Editor/FontFamily_b8krby.svg');
 }
 #at-fontFamily:hover::before {
-  content: 'Fontfamily';
+  content: 'Font Family';
 }
 #at-fontSize {
   background-size: 28px;
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1581920719/AT-Editor/fontSize_ulwt9j.svg');
 }
 #at-fontSize:hover::before {
-  content: 'Fontsize';
+  content: 'Font Size';
 }
 #at-fontColor {
   background-size: 28px;
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1581922264/AT-Editor/fontColor_zldnhr.svg');
 }
 #at-fontColor:hover::before {
-  content: 'Fontcolor';
+  content: 'Font Color';
 }
 #at-backgroundColor {
   background-size: 28px;
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1581920719/AT-Editor/backgroundColor_gwjxcl.svg');
 }
 #at-backgroundColor:hover::before {
-  content: 'Backgroundcolor';
+  content: 'Background Color';
 }
 #at-clearFormate {
   background-size: 28px;
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1581920719/AT-Editor/ClearFontStyle_ikkfhm.svg');
 }
 #at-clearFormate:hover::before {
-  content: 'Clear Formate';
+  content: 'Clear Formatting';
 }
 #at-left {
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1577804832/AT-Editor/at-left_lgfdbj.svg');
@@ -347,4 +347,87 @@ button#url_insert:hover {
   transition: 0.2s all ease-in-out;
   background: #0098f7;
   color: #fff;
+}
+.at-btnDropDown {
+  background-position-x: 0px;
+  width: 40px;
+}
+.at-btnDropDown::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: #000;
+  clip-path: polygon(50% 50%, 0 0, 100% 0);
+  right: 3px;
+}
+.at-dropdown_wrapper {
+  position: relative;
+  display: inline-block;
+}
+.at-dropdown {
+  display: none;
+  position: absolute;
+  left: 9px;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+ul.at-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0px;
+}
+ul.at-list li {
+  padding: 5px 20px;
+  white-space: nowrap;
+  display: block;
+  cursor: pointer;
+}
+ul.at-list li:hover {
+  background-color: #e2e2e2;
+}
+.at-swatch_wrapper {
+  min-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+.at-swatch_wrapper > .at-swatch:hover {
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+}
+.at-colorPicker {
+  padding: 10px;
+}
+#at-colorPicker {
+  cursor: pointer;
+	-webkit-appearance: none;
+	border: none;
+	width: calc(100% - 60px);
+  height: 30px;
+  outline: o none;
+}
+#at-colorPicker::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+#at-colorPicker::-webkit-color-swatch {
+	border: none;
+}
+#at-colorOK {
+  border: none;
+  background: #fff;
+  padding: 7px 15px;
+  height: 30px;
+  color: #0098f7;
+  position: relative;
+  top: -10px;
+  cursor: pointer;
+  border: 1px solid #0098f7;
+  border-radius: 3px;
+}
+#at-colorOK:focus {
+  outline: o none;
 }
