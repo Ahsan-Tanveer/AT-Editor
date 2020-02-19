@@ -23,12 +23,81 @@ class ATEditor {
           <div class="at-action_section"></div>
         </div>
         <div class="at-text_sub_section at-sub">
-          <button type="button" class="at-btnStrike at-toolbarBtn" id="at-strike"></button>
-          <button type="button" class="at-btnSubScript at-toolbarBtn" id="at-subScript"></button>
-          <button type="button" class="at-btnSuperScript at-toolbarBtn" id="at-superScript"></button>
-          <button type="button" class="at-btnFontFamily at-toolbarBtn" id="at-fontFamily"></button>
-          <button type="button" class="at-btnFontSize at-toolbarBtn" id="at-fontSize"></button>
-          <button type="button" class="at-btnFontColor at-toolbarBtn" id="at-fontColor"></button>
+          <button type="button" class="at-btnStrike at-toolbarBtn" id="at-strike" onclick="doFormating(this, 'strike')"></button>
+          <button type="button" class="at-btnSubScript at-toolbarBtn" id="at-subScript" onclick="doFormating(this, 'subscript')"></button>
+          <button type="button" class="at-btnSuperScript at-toolbarBtn" id="at-superScript" onclick="doFormating(this, 'superscript')"></button>
+          <div class="at-dropdown_wrapper">
+            <button type="button" class="at-btnFontFamily at-toolbarBtn at-btnDropDown" id="at-fontFamily" onclick="showDropDown(this)"></button>
+            <div class="at-dropdown">
+              <ul class="at-list">
+                <li data-type="fontName" data-value="Arial,Helvetica,sans-serif" style="font-family: Arial,Helvetica,sans-serif;" onclick="getDropDownValue(this)">Arial</li>
+                <li data-type="fontName" data-value="Georgia,serif" style="font-family: Georgia,serif" onclick="getDropDownValue(this)">Georgia</li>
+                <li data-type="fontName" data-value="Impact,Charcoal,sans-serif" style="font-family: Impact,Charcoal,sans-serif" onclick="getDropDownValue(this)">Impact</li>
+                <li data-type="fontName" data-value="Tahoma,Geneva,sans-serif" style="font-family: Tahoma,Geneva,sans-serif" onclick="getDropDownValue(this)">Tahoma</li>
+                <li data-type="fontName" data-value="Times New Roman,Times,serif,-webkit-standard" style="font-family: Times New Roman,Times,serif,-webkit-standard" onclick="getDropDownValue(this)">Times New Roman</li>
+                <li data-type="fontName" data-value="Verdana,Geneva,sans-serif" style="font-family: Verdana,Geneva,sans-serif" onclick="getDropDownValue(this)">Verdana</li>
+              </ul>
+            </div>
+          </div>
+          <div class="at-dropdown_wrapper">
+            <button type="button" class="at-btnFontSize at-toolbarBtn at-btnDropDown" id="at-fontSize" onclick="showDropDown(this)"></button>
+            <div class="at-dropdown">
+              <ul class="at-list">
+                <li data-type="fontSize" data-value="8" onclick="getDropDownValue(this)">8</li>
+                <li data-type="fontSize" data-value="9" onclick="getDropDownValue(this)">9</li>
+                <li data-type="fontSize" data-value="10" onclick="getDropDownValue(this)">10</li>
+                <li data-type="fontSize" data-value="12" onclick="getDropDownValue(this)">12</li>
+                <li data-type="fontSize" data-value="14" onclick="getDropDownValue(this)">14</li>
+                <li data-type="fontSize" data-value="18" onclick="getDropDownValue(this)">18</li>
+                <li data-type="fontSize" data-value="24" onclick="getDropDownValue(this)">24</li>
+                <li data-type="fontSize" data-value="30" onclick="getDropDownValue(this)">30</li>
+                <li data-type="fontSize" data-value="36" onclick="getDropDownValue(this)">36</li>
+                <li data-type="fontSize" data-value="48" onclick="getDropDownValue(this)">48</li>
+                <li data-type="fontSize" data-value="60" onclick="getDropDownValue(this)">60</li>
+                <li data-type="fontSize" data-value="76" onclick="getDropDownValue(this)">76</li>
+                <li data-type="fontSize" data-value="96" onclick="getDropDownValue(this)">96</li>
+              </ul>
+            </div>
+          </div>
+          <div class="at-dropdown_wrapper">
+            <button type="button" class="at-btnFontColor at-toolbarBtn at-btnDropDown" id="at-fontColor" onclick="showDropDown(this)"></button>
+            <div class="at-dropdown">
+              <div class="at-swatch_wrapper">
+                <div data-type="fontColor" data-value="#61BD6D" class="at-swatch" style="width:33.33px; height:33.33px;background:#61BD6D;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#1ABC9C" class="at-swatch" style="width:33.33px; height:33.33px;background:#1ABC9C;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#54ACD2" class="at-swatch" style="width:33.33px; height:33.33px;background:#54ACD2;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#2C82C9" class="at-swatch" style="width:33.33px; height:33.33px;background:#2C82C9;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#9365B8" class="at-swatch" style="width:33.33px; height:33.33px;background:#9365B8;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#475577" class="at-swatch" style="width:33.33px; height:33.33px;background:#475577;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#CCCCCC" class="at-swatch" style="width:33.33px; height:33.33px;background:#CCCCCC;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#41A85F" class="at-swatch" style="width:33.33px; height:33.33px;background:#41A85F;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#00A885" class="at-swatch" style="width:33.33px; height:33.33px;background:#00A885;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#3D8EB9" class="at-swatch" style="width:33.33px; height:33.33px;background:#3D8EB9;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#2969B0" class="at-swatch" style="width:33.33px; height:33.33px;background:#2969B0;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#553982" class="at-swatch" style="width:33.33px; height:33.33px;background:#553982;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#28324E" class="at-swatch" style="width:33.33px; height:33.33px;background:#28324E;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#000000" class="at-swatch" style="width:33.33px; height:33.33px;background:#000000;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#F7DA64" class="at-swatch" style="width:33.33px; height:33.33px;background:#F7DA64;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#FBA026" class="at-swatch" style="width:33.33px; height:33.33px;background:#FBA026;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#EB6B56" class="at-swatch" style="width:33.33px; height:33.33px;background:#EB6B56;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#E25041" class="at-swatch" style="width:33.33px; height:33.33px;background:#E25041;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#A38F84" class="at-swatch" style="width:33.33px; height:33.33px;background:#A38F84;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#EFEFEF" class="at-swatch" style="width:33.33px; height:33.33px;background:#EFEFEF;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#FFFFFF" class="at-swatch" style="width:33.33px; height:33.33px;background:#FFFFFF;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#FAC51C" class="at-swatch" style="width:33.33px; height:33.33px;background:#FAC51C;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#F37934" class="at-swatch" style="width:33.33px; height:33.33px;background:#F37934;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#D14841 class="at-swatch" style="width:33.33px; height:33.33px;background:#D14841;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#B8312F" class="at-swatch" style="width:33.33px; height:33.33px;background:#B8312F;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#7C706B" class="at-swatch" style="width:33.33px; height:33.33px;background:#7C706B;" onclick="getDropDownValue(this)"></div>
+                <div data-type="fontColor" data-value="#D1D5D8" class="at-swatch" style="width:33.33px; height:33.33px;background:#D1D5D8;" onclick="getDropDownValue(this)"></div>
+              </div>
+              <div class="at-colorPicker">
+                <label style="font-size:14px;" for="at-colorPicker">Select Color</label>
+                <input type="color" id="at-colorPicker">
+                <button id="at-colorOK">OK</button>
+              </div>
+            </div>
+          </div>
           <button type="button" class="at-btnBackgroundColor at-toolbarBtn" id="at-backgroundColor"></button>
           <button type="button" class="at-btnClearFormate at-toolbarBtn" id="at-clearFormate"></button>
         </div>
@@ -118,7 +187,9 @@ class ATEditor {
     }
   }
 }
-
+$(document).on('click', '#at-editable', function(){
+  $('.at-dropdown').slideUp();
+});
 $(document).on('click', '.at-btnMore', function(){
   let eleID = $(this).attr('id');
   let subText = $('.at-text_sub_section');
@@ -189,6 +260,73 @@ function restoreSelection(range) {
   }
 }
 
+let showDropDown = (context) => {
+  selected_ = saveSelection();
+  $('.at-dropdown').slideUp();
+  $(context).next().slideToggle();
+}
+
+let getDropDownValue = (context) => {
+  restoreSelection(selected_);
+  $(context).parents('.at-editor').find('div[contenteditable="true"]').focus();
+  let fontType = $(context).attr('data-type');
+  let fontValue = $(context).attr('data-value');
+  let html = window.getSelection().anchorNode.textContent;
+  let parentEle = window.getSelection().anchorNode.parentElement;
+  let firstNode = window.getSelection().anchorNode.childNodes[1] != undefined ? window.getSelection().anchorNode.childNodes[1].nodeName : 'OTHER';
+  if(fontType == 'fontName') {
+    if(window.getSelection){
+      if(parentEle.style.fontFamily) {
+        parentEle.style.fontFamily = fontValue;
+      }else {
+        if(firstNode == 'SPAN'){
+          window.getSelection().anchorNode.childNodes[1].style.fontFamily = fontValue;
+        }else {
+          let span = document.createElement('span');
+          span.style.fontFamily = fontValue;
+          span.classList.add('fontStyle');
+          window.getSelection().getRangeAt(0).surroundContents(span);
+          $('.fontStyle').last().html($('.fontStyle').last().html()+'&#8203;');
+        }
+      }
+    }
+  }else if(fontType == 'fontSize') {
+    if(window.getSelection){
+      if(parentEle.style.fontSize) {
+        parentEle.style.fontSize = fontValue+'px';
+      }else {
+        if(firstNode == 'SPAN'){
+          window.getSelection().anchorNode.childNodes[1].style.fontSize = fontValue+'px';
+        }else {
+          let span = document.createElement('span');
+          span.style.fontSize = fontValue+'px';
+          span.classList.add('fontStyle');
+          window.getSelection().getRangeAt(0).surroundContents(span);
+          $('.fontStyle').last().html($('.fontStyle').last().html()+'&#8203;');
+        }
+      }
+    }
+  }else if(fontType == 'fontColor') {
+    if(window.getSelection){
+      if(parentEle.style.color) {
+        parentEle.style.color = fontValue;
+      }else {
+        if(firstNode == 'SPAN'){
+          window.getSelection().anchorNode.childNodes[1].style.color = fontValue;
+        }else {
+          let span = document.createElement('span');
+          span.style.color = fontValue;
+          span.classList.add('fontStyle');
+          window.getSelection().getRangeAt(0).surroundContents(span);
+          $('.fontStyle').last().html($('.fontStyle').last().html()+'&#8203;');
+        }
+      }
+    }
+  }
+  console.log(parentEle);
+  $(context).parents('.at-dropdown').slideToggle();
+}
+
 let doFormating = (context, param) => {
   $(context).parents('.at-editor').find('div[contenteditable="true"]').focus();
   if(param === 'bold') {
@@ -211,5 +349,11 @@ let doFormating = (context, param) => {
     let selected = window.getSelection();
     let a = getURL(context, selected);
     window.getSelection().getRangeAt(0).surroundContents(a);
+  }else if(param === 'strike') {
+    document.execCommand("strikeThrough");
+  }else if(param === 'subscript') {
+    document.execCommand("subscript");
+  }else if(param === 'superscript') {
+    document.execCommand("superscript");
   }
 }
