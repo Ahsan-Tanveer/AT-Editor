@@ -43,19 +43,13 @@ class ATEditor {
             <button type="button" class="at-btnFontSize at-toolbarBtn at-btnDropDown" id="at-fontSize" onclick="showDropDown(this)"></button>
             <div class="at-dropdown">
               <ul class="at-list">
-                <li data-type="fontSize" data-value="8" onclick="getDropDownValue(this)">8</li>
-                <li data-type="fontSize" data-value="9" onclick="getDropDownValue(this)">9</li>
-                <li data-type="fontSize" data-value="10" onclick="getDropDownValue(this)">10</li>
-                <li data-type="fontSize" data-value="12" onclick="getDropDownValue(this)">12</li>
-                <li data-type="fontSize" data-value="14" onclick="getDropDownValue(this)">14</li>
-                <li data-type="fontSize" data-value="18" onclick="getDropDownValue(this)">18</li>
-                <li data-type="fontSize" data-value="24" onclick="getDropDownValue(this)">24</li>
-                <li data-type="fontSize" data-value="30" onclick="getDropDownValue(this)">30</li>
-                <li data-type="fontSize" data-value="36" onclick="getDropDownValue(this)">36</li>
-                <li data-type="fontSize" data-value="48" onclick="getDropDownValue(this)">48</li>
-                <li data-type="fontSize" data-value="60" onclick="getDropDownValue(this)">60</li>
-                <li data-type="fontSize" data-value="76" onclick="getDropDownValue(this)">76</li>
-                <li data-type="fontSize" data-value="96" onclick="getDropDownValue(this)">96</li>
+                <li data-type="fontSize" data-value="1" onclick="getDropDownValue(this)">1</li>
+                <li data-type="fontSize" data-value="2" onclick="getDropDownValue(this)">2</li>
+                <li data-type="fontSize" data-value="3" onclick="getDropDownValue(this)">3</li>
+                <li data-type="fontSize" data-value="4" onclick="getDropDownValue(this)">4</li>
+                <li data-type="fontSize" data-value="5" onclick="getDropDownValue(this)">5</li>
+                <li data-type="fontSize" data-value="6" onclick="getDropDownValue(this)">6</li>
+                <li data-type="fontSize" data-value="7" onclick="getDropDownValue(this)">7</li>
               </ul>
             </div>
           </div>
@@ -94,12 +88,50 @@ class ATEditor {
               <div class="at-colorPicker">
                 <label style="font-size:14px;" for="at-colorPicker">Select Color</label>
                 <input type="color" id="at-colorPicker">
-                <button id="at-colorOK">OK</button>
+                <button data-type="fontColor" id="at-colorOK" onclick="getDropDownValue(this, getColorValue(this))">OK</button>
               </div>
             </div>
           </div>
-          <button type="button" class="at-btnBackgroundColor at-toolbarBtn" id="at-backgroundColor"></button>
-          <button type="button" class="at-btnClearFormate at-toolbarBtn" id="at-clearFormate"></button>
+          <div class="at-dropdown_wrapper">
+            <button type="button" class="at-btnBackgroundColor at-toolbarBtn at-btnDropDown" id="at-backgroundColor" onclick="showDropDown(this)"></button>
+            <div class="at-dropdown">
+              <div class="at-swatch_wrapper">
+                <div data-type="background" data-value="#61BD6D" class="at-swatch" style="width:33.33px; height:33.33px;background:#61BD6D;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#1ABC9C" class="at-swatch" style="width:33.33px; height:33.33px;background:#1ABC9C;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#54ACD2" class="at-swatch" style="width:33.33px; height:33.33px;background:#54ACD2;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#2C82C9" class="at-swatch" style="width:33.33px; height:33.33px;background:#2C82C9;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#9365B8" class="at-swatch" style="width:33.33px; height:33.33px;background:#9365B8;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#475577" class="at-swatch" style="width:33.33px; height:33.33px;background:#475577;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#CCCCCC" class="at-swatch" style="width:33.33px; height:33.33px;background:#CCCCCC;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#41A85F" class="at-swatch" style="width:33.33px; height:33.33px;background:#41A85F;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#00A885" class="at-swatch" style="width:33.33px; height:33.33px;background:#00A885;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#3D8EB9" class="at-swatch" style="width:33.33px; height:33.33px;background:#3D8EB9;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#2969B0" class="at-swatch" style="width:33.33px; height:33.33px;background:#2969B0;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#553982" class="at-swatch" style="width:33.33px; height:33.33px;background:#553982;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#28324E" class="at-swatch" style="width:33.33px; height:33.33px;background:#28324E;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#000000" class="at-swatch" style="width:33.33px; height:33.33px;background:#000000;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#F7DA64" class="at-swatch" style="width:33.33px; height:33.33px;background:#F7DA64;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#FBA026" class="at-swatch" style="width:33.33px; height:33.33px;background:#FBA026;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#EB6B56" class="at-swatch" style="width:33.33px; height:33.33px;background:#EB6B56;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#E25041" class="at-swatch" style="width:33.33px; height:33.33px;background:#E25041;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#A38F84" class="at-swatch" style="width:33.33px; height:33.33px;background:#A38F84;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#EFEFEF" class="at-swatch" style="width:33.33px; height:33.33px;background:#EFEFEF;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#FFFFFF" class="at-swatch" style="width:33.33px; height:33.33px;background:#FFFFFF;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#FAC51C" class="at-swatch" style="width:33.33px; height:33.33px;background:#FAC51C;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#F37934" class="at-swatch" style="width:33.33px; height:33.33px;background:#F37934;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#D14841 class="at-swatch" style="width:33.33px; height:33.33px;background:#D14841;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#B8312F" class="at-swatch" style="width:33.33px; height:33.33px;background:#B8312F;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#7C706B" class="at-swatch" style="width:33.33px; height:33.33px;background:#7C706B;" onclick="getDropDownValue(this)"></div>
+                <div data-type="background" data-value="#00000000" class="at-swatch" style="width:33.33px; height:33.33px;background:#00000000;" onclick="getDropDownValue(this)"></div>
+              </div>
+              <div class="at-colorPicker">
+                <label style="font-size:14px;" for="at-colorPicker">Select Color</label>
+                <input type="color" id="at-colorPicker">
+                <button data-type="background" id="at-colorOK" onclick="getDropDownValue(this, getColorValue(this))">OK</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="at-btnClearFormate at-toolbarBtn" id="at-clearFormate" onclick="doFormating(this, 'clear')"></button>
         </div>
         <div class="at-paragraph_sub_section at-sub">
           <button type="button" class="at-btnJustify at-toolbarBtn" id="at-justify"></button>
@@ -226,6 +258,11 @@ let getURL = (context, selected) => {
   }
 }
 
+let getColorValue = (context) => {
+  let color = $(context).prev('#at-colorPicker').val();
+  return color;
+}
+
 let link = (url, target = false) => {
   restoreSelection(selected_);
   if (window.getSelection().toString()) {
@@ -266,64 +303,32 @@ let showDropDown = (context) => {
   $(context).next().slideToggle();
 }
 
-let getDropDownValue = (context) => {
+let getDropDownValue = (context, selectedColor = undefined) => {
   restoreSelection(selected_);
   $(context).parents('.at-editor').find('div[contenteditable="true"]').focus();
   let fontType = $(context).attr('data-type');
   let fontValue = $(context).attr('data-value');
-  let html = window.getSelection().anchorNode.textContent;
-  let parentEle = window.getSelection().anchorNode.parentElement;
-  let firstNode = window.getSelection().anchorNode.childNodes[1] != undefined ? window.getSelection().anchorNode.childNodes[1].nodeName : 'OTHER';
   if(fontType == 'fontName') {
-    if(window.getSelection){
-      if(parentEle.style.fontFamily) {
-        parentEle.style.fontFamily = fontValue;
-      }else {
-        if(firstNode == 'SPAN'){
-          window.getSelection().anchorNode.childNodes[1].style.fontFamily = fontValue;
-        }else {
-          let span = document.createElement('span');
-          span.style.fontFamily = fontValue;
-          span.classList.add('fontStyle');
-          window.getSelection().getRangeAt(0).surroundContents(span);
-          $('.fontStyle').last().html($('.fontStyle').last().html()+'&#8203;');
-        }
-      }
-    }
+    document.execCommand("fontName", false, fontValue);
   }else if(fontType == 'fontSize') {
-    if(window.getSelection){
-      if(parentEle.style.fontSize) {
-        parentEle.style.fontSize = fontValue+'px';
-      }else {
-        if(firstNode == 'SPAN'){
-          window.getSelection().anchorNode.childNodes[1].style.fontSize = fontValue+'px';
-        }else {
-          let span = document.createElement('span');
-          span.style.fontSize = fontValue+'px';
-          span.classList.add('fontStyle');
-          window.getSelection().getRangeAt(0).surroundContents(span);
-          $('.fontStyle').last().html($('.fontStyle').last().html()+'&#8203;');
-        }
-      }
-    }
+    document.execCommand("fontSize", false, fontValue);
   }else if(fontType == 'fontColor') {
-    if(window.getSelection){
-      if(parentEle.style.color) {
-        parentEle.style.color = fontValue;
-      }else {
-        if(firstNode == 'SPAN'){
-          window.getSelection().anchorNode.childNodes[1].style.color = fontValue;
-        }else {
-          let span = document.createElement('span');
-          span.style.color = fontValue;
-          span.classList.add('fontStyle');
-          window.getSelection().getRangeAt(0).surroundContents(span);
-          $('.fontStyle').last().html($('.fontStyle').last().html()+'&#8203;');
-        }
-      }
+    if(selectedColor != undefined) {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('foreColor', false, selectedColor);
+    }else {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('foreColor', false, fontValue);
+    }
+  }else if (fontType == 'background') {
+    if(selectedColor != undefined) {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('hiliteColor', false, selectedColor);
+    }else {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('hiliteColor', false, fontValue);
     }
   }
-  console.log(parentEle);
   $(context).parents('.at-dropdown').slideToggle();
 }
 
@@ -355,5 +360,8 @@ let doFormating = (context, param) => {
     document.execCommand("subscript");
   }else if(param === 'superscript') {
     document.execCommand("superscript");
+  }
+  else if(param === 'clear') {
+    document.execCommand("removeFormat");
   }
 }
