@@ -5,12 +5,12 @@ class ATEditor {
   }
 
   finishStyle(placeholder) {
-      let editable = document.querySelector(this.selector);
-      $(editable).attr({'contenteditable':'true', 'id':'at-editable', 'placeholder': placeholder});
-      let toolbarHtml= this.set_toolbar(editable);
-      $(editable).before(toolbarHtml);
-      $(editable).remove();
-      this.textMenu();
+    let editable = document.querySelector(this.selector);
+    $(editable).attr({'contenteditable':'true', 'id':'at-editable', 'placeholder': placeholder});
+    let toolbarHtml= this.set_toolbar(editable);
+    $(editable).before(toolbarHtml);
+    $(editable).remove();
+    this.textMenu();
   }
 
   set_toolbar(editable){
@@ -134,11 +134,24 @@ class ATEditor {
           <button type="button" class="at-btnClearFormate at-toolbarBtn" id="at-clearFormate" onclick="doFormating(this, 'clear')"></button>
         </div>
         <div class="at-paragraph_sub_section at-sub">
-          <button type="button" class="at-btnJustify at-toolbarBtn" id="at-justify"></button>
-          <button type="button" class="at-btnLineHeight at-toolbarBtn" id="at-lineHeight"></button>
-          <button type="button" class="at-btnDecreaseIndent at-toolbarBtn" id="at-decreaseIndent"></button>
-          <button type="button" class="at-btnIncreaseIndent at-toolbarBtn" id="at-increaseIndent"></button>
-          <button type="button" class="at-btnQuote at-toolbarBtn" id="at-quote"></button>
+          <button type="button" class="at-btnJustify at-toolbarBtn" id="at-justify" onclick="doFormating(this, 'justify')"></button>
+          <div class="at-dropdown_wrapper">
+            <button type="button" class="at-btnLineHeight at-toolbarBtn" id="at-lineHeight"></button>
+            <div class="at-dropdown">
+              <ul class="at-list">
+                <li data-type="fontSize" data-value="1" onclick="getDropDownValue(this)">1</li>
+                <li data-type="fontSize" data-value="2" onclick="getDropDownValue(this)">2</li>
+                <li data-type="fontSize" data-value="3" onclick="getDropDownValue(this)">3</li>
+                <li data-type="fontSize" data-value="4" onclick="getDropDownValue(this)">4</li>
+                <li data-type="fontSize" data-value="5" onclick="getDropDownValue(this)">5</li>
+                <li data-type="fontSize" data-value="6" onclick="getDropDownValue(this)">6</li>
+                <li data-type="fontSize" data-value="7" onclick="getDropDownValue(this)">7</li>
+              </ul>
+            </div>
+          </div>
+          <button type="button" class="at-btnDecreaseIndent at-toolbarBtn" id="at-decreaseIndent" onclick="doFormating(this, 'outdent')"></button>
+          <button type="button" class="at-btnIncreaseIndent at-toolbarBtn" id="at-increaseIndent" onclick="doFormating(this, 'indent')"></button>
+          <button type="button" data-active="false" class="at-btnQuote at-toolbarBtn" id="at-quote" onclick="doFormating(this, 'blockquote')"></button>
         </div>
         <div class="at-misll_sub_section at-sub"></div>
         <div class="at-wrapper">
@@ -165,8 +178,8 @@ class ATEditor {
       $('#at-editor .at-toolbar .at-paragraph_section').html(`
         <div class="at-paragraphBtn">
           <button type="button" class="at-btnleft at-toolbarBtn" id="at-left" onclick="doFormating(this, 'left')"></button>
-          <button type="button" class="at-btnright at-toolbarBtn" id="at-right" onclick="doFormating(this, 'right')"></button>
           <button type="button" class="at-btncenter at-toolbarBtn" id="at-center" onclick="doFormating(this, 'center')"></button>
+          <button type="button" class="at-btnright at-toolbarBtn" id="at-right" onclick="doFormating(this, 'right')"></button>
           <button type="button" class="at-btnMore at-toolbarBtn" id="at-paragraphMore"></button>
         </div>
       `);
@@ -201,8 +214,8 @@ class ATEditor {
     let action = function(){
       $('#at-editor .at-toolbar .at-action_section').html(`
         <div class="at-misllBtn">
-          <button type="button" class="at-btnUndo at-toolbarBtn" id="at-undo"></button>
-          <button type="button" class="at-btnRedo at-toolbarBtn" id="at-redo"></button>
+          <button type="button" class="at-btnUndo at-toolbarBtn" id="at-undo" onclick="doFormating(this, 'undo')"></button>
+          <button type="button" class="at-btnRedo at-toolbarBtn" id="at-redo" onclick="doFormating(this, 'redo')"></button>
         </div>
       `);
     };
@@ -360,8 +373,25 @@ let doFormating = (context, param) => {
     document.execCommand("subscript");
   }else if(param === 'superscript') {
     document.execCommand("superscript");
-  }
-  else if(param === 'clear') {
+  }else if(param === 'clear') {
     document.execCommand("removeFormat");
+  }else if(param === 'justify') {
+    document.execCommand("justifyFull");
+  }else if(param === 'indent') {
+    document.execCommand('indent', true, null);
+  }else if(param === 'outdent') {
+    document.execCommand('outdent', true, null);
+  }else if(param === 'blockquote') {
+    if($('#at-quote').attr('data-active') == 'false'){
+      document.execCommand('formatBlock', false, 'blockquote');
+      $('#at-quote').attr('data-active', 'true');
+    }else {
+      document.execCommand('formatBlock', false, 'div');
+      $('#at-quote').attr('data-active', 'false');
+    }
+  }else if(param === 'undo') {
+    document.execCommand("undo");
+  }else if(param === 'redo') {
+    document.execCommand("redo");
   }
 }

@@ -1,3 +1,7 @@
+p {
+  margin-top: 0px;
+  margin-bottom: 1em;
+}
 #at-editor {
   border: 1px solid #bbbbbb;
   border-radius: 5px;
@@ -430,4 +434,8 @@ ul.at-list li:hover {
 }
 #at-colorOK:focus {
   outline: o none;
+}
+blockquote {
+  border-left: 2px solid lightgrey;
+  padding-left: 10px;
 }
