@@ -240,9 +240,8 @@ class ATEditor {
   }
 }
 
-let converter = () => {
-  console.log('working');
-  var str = $('#at-editable').html();
+let converter = (context) => {
+  var str = $(context).html();
   str.replace(/&nbsp;/g, ' ');
 	str = str.replace(/\#([a-zA-Z0-9\.\-\&]+)/g, '<span class="at-hashtag">#$1</span>');
 	str = str.replace(/@(.+?)(?=[\s.,:,]|$)/g, '<span class="at-hashtag">@$1</span>');
@@ -255,14 +254,16 @@ let converter = () => {
   ele.innerHTML = ele.innerHTML.replace(';</div>', '</div>');
   ele.innerHTML = ele.innerHTML.replace('<br>        <br>      ', '');
   $(ele).children('.editPopupWrapper').remove();
-	$('#at-output').replaceWith(ele);
+	$(context).next().children('#at-output').replaceWith(ele);
 }
 
 $(document).on('click', '#at-editable', function(){
   $('.at-dropdown').slideUp();
 });
 
-$(document).on('input keyup', '#at-editable', converter);
+$(document).on('input keyup', '#at-editable', function(){
+  converter(this);
+});
 
 $(document).on('paste', '#at-editable', function(e){
   e.preventDefault();
