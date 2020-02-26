@@ -68,15 +68,25 @@ p {
   border-bottom: 1px solid #e3e3e3;
 }
 .at-wrapper > #at-editable {
+  box-sizing: border-box;
+  position: relative;
   padding: 10px 20px;
   line-height: 26px;
   min-height: 100px;
+  outline: none;
+  z-index: 2;
 }
 .at-wrapper > #at-editable:focus {
   outline: 0 none;
 }
 .at-footer {
   min-height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 50px;
+  font-size: 18px;
+  color: #5d5d5d;
 }
 #at-undo {
   background-image: url('https://res.cloudinary.com/dc5qvh0ye/image/upload/v1581920724/AT-Editor/undo_nkerqc.svg');
@@ -268,6 +278,7 @@ p {
   border-radius: 5px;
   left: 102px;
   display: none;
+  z-index: 99999;
 }
 .linkPopup > .form_wrapper {
   padding: 20px;
@@ -379,6 +390,7 @@ button#url_insert:hover {
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  z-index: 9999;
 }
 ul.at-list {
   list-style: none;
@@ -439,3 +451,73 @@ blockquote {
   border-left: 2px solid lightgrey;
   padding-left: 10px;
 }
+.at-wrapper {
+  position: relative;
+}
+div.readonly {
+  color: rgba(0,0,0,0) !important;
+}
+div.readonly, #at-editable {
+  white-space: wrap;
+  top: 0;
+  left: 0;
+}
+
+span.highlight {
+  background: rgba(255, 95, 95, 0.2) !important;
+  margin: 0px;
+  padding: 0;
+  position: relative;
+  top: 0;
+}
+
+.left, .mid, .right {
+  display:inline-block;
+  padding: 40px;
+  vertical-align: top;
+}
+/* .readonly .emojioneemoji, .readonly a {
+  display: none;
+} */
+#at-editable {
+  color: rgba(0,0,0,0);
+  height: auto; 
+  font-family: arial; 
+  padding: 3px 18px 3px 10px; 
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  line-height: unset;
+  width: 100%;
+  background: transparent;
+  caret-color: #000;
+ }
+#at-editable a, #at-editable span, div.readonly span {
+  color: rgba(0,0,0,0) !important;
+}
+#at-editable a, #at-editable span, #at-output span {
+  background-color: rgba(0,0,0,0) !important;
+}
+#at-output .at-hashtag, #at-output a {
+  color: #007bff;
+}
+#at-hashtag, div.readonly {
+  width: 100%;
+  height: auto; 
+  position: absolute; 
+  z-index: 0; 
+  font-family: arial; 
+  padding: 10px 20px; 
+  margin: 0; 
+  background-color: transparent;
+  color: rgba(0,21,5,0.9);
+  top: 0;
+  line-height: 26px;
+  box-sizing: border-box;
+ }
+ #at-output br:nth-child(1) {
+   display : none;
+ }
+ #at-output div {
+   min-height: 26px;
+ } 

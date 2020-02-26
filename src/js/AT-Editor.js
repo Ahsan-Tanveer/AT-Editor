@@ -1,19 +1,30 @@
 class ATEditor {
   constructor(selector, main_obj = null) {
     this.selector = selector;
-    this.finishStyle(main_obj == null ? 'Type something': main_obj.placeholder);
+    this.finishStyle(main_obj);
   }
 
-  finishStyle(placeholder) {
+  finishStyle(main_obj) {
+    let placeholder = main_obj == null ? 'Type something': main_obj.placeholder;
+    let characterLimit = main_obj.characterLimit;
+    let hashtag = main_obj.hashtag;
     let editable = document.querySelector(this.selector);
-    $(editable).attr({'contenteditable':'true', 'id':'at-editable', 'placeholder': placeholder});
-    let toolbarHtml= this.set_toolbar(editable);
+    let attr = {
+      'contenteditable':'true',
+      'id':'at-editable',
+      'placeholder': placeholder,
+      ...(characterLimit != undefined) && {'data-maxlength': characterLimit},
+      ...(characterLimit != undefined) && {'onkeyup': 'characterCounter(this)'},
+      ...(characterLimit != undefined) && {'onblur': 'characterCounter(this)'}
+
+    };
+    $(editable).attr(attr);
+    let toolbarHtml= this.set_toolbar(editable, characterLimit, hashtag);
     $(editable).before(toolbarHtml);
     $(editable).remove();
-    this.textMenu();
   }
 
-  set_toolbar(editable){
+  set_toolbar(editable, characterLimit, hashtag){
     return `
       <div class="at-editor" id="at-editor">
         <div class="at-toolbar">
@@ -155,25 +166,28 @@ class ATEditor {
         </div>
         <div class="at-misll_sub_section at-sub"></div>
         <div class="at-wrapper">
+          ${characterLimit != undefined ? '<div class="readonly"></div>' : ''}
           ${editable.outerHTML}
+          ${hashtag ? '<div id="at-hashtag"><div id="at-output"></div></div>' : ''}
         </div>
-        <div class="at-footer"></div>
+        <div class="at-footer">
+          ${characterLimit != undefined ? '<div class="characterCount">Characters: <span class="count">0</span></div>' : ''}
+        </div>
       </div>
     `;
   }
 
-  textMenu(){
-    $('#at-editor .at-toolbar .at-text_section').html(`
-      <div class="at-textBtn">
-        <button type="button" class="at-btnBold at-toolbarBtn" id="at-bold" onclick="doFormating(this, 'bold')"></button>
-        <button type="button" class="at-btnItalic at-toolbarBtn" id="at-italic" onclick="doFormating(this, 'italic')"></button>
-        <button type="button" class="at-btnUnderline at-toolbarBtn" id="at-underline" onclick="doFormating(this, 'underline')"></button>
-        <button type="button" class="at-btnMore at-toolbarBtn" id="at-textMore"></button>
-      </div>
-    `);
-  }
-
   toolbar(obj){
+    let font = function() {
+      $('#at-editor .at-toolbar .at-text_section').html(`
+        <div class="at-textBtn">
+          <button type="button" class="at-btnBold at-toolbarBtn" id="at-bold" onclick="doFormating(this, 'bold')"></button>
+          <button type="button" class="at-btnItalic at-toolbarBtn" id="at-italic" onclick="doFormating(this, 'italic')"></button>
+          <button type="button" class="at-btnUnderline at-toolbarBtn" id="at-underline" onclick="doFormating(this, 'underline')"></button>
+          <button type="button" class="at-btnMore at-toolbarBtn" id="at-textMore"></button>
+        </div>
+      `);
+    };
     let paragraph = function() {
       $('#at-editor .at-toolbar .at-paragraph_section').html(`
         <div class="at-paragraphBtn">
@@ -219,22 +233,54 @@ class ATEditor {
         </div>
       `);
     };
-    if(obj.misll && obj.paragraph){
-      action();
-      paragraph();
-      misll();
-    }else if(!obj.misll && obj.paragraph){
-      action();
-      paragraph();
-    }else if(obj.misll && !obj.paragraph){
-      action();
-      misll();
-    }
+    action();
+    obj.misll && misll();
+    obj.paragraph && paragraph();
+    obj.font && font();
   }
 }
+
+let converter = () => {
+  console.log('working');
+  var str = $('#at-editable').html();
+  str.replace(/&nbsp;/g, ' ');
+	str = str.replace(/\#([a-zA-Z0-9\.\-\&]+)/g, '<span class="at-hashtag">#$1</span>');
+	str = str.replace(/@(.+?)(?=[\s.,:,]|$)/g, '<span class="at-hashtag">@$1</span>');
+	str = str.replace(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g, '<span class="at-hashtag">$1</span>');
+  var ele = document.createElement('div');
+  ele.id= 'at-output';
+  ele.innerHTML = str.replace('&nbsp', ' ').replace(';', '');
+  ele.innerHTML = ele.innerHTML.replace(';', '');
+  ele.innerHTML = ele.innerHTML.replace('</span>;', '</span>');
+  ele.innerHTML = ele.innerHTML.replace(';</div>', '</div>');
+  ele.innerHTML = ele.innerHTML.replace('<br>        <br>      ', '');
+  $(ele).children('.editPopupWrapper').remove();
+	$('#at-output').replaceWith(ele);
+}
+
 $(document).on('click', '#at-editable', function(){
   $('.at-dropdown').slideUp();
 });
+
+$(document).on('input keyup', '#at-editable', converter);
+
+$(document).on('paste', '#at-editable', function(e){
+  e.preventDefault();
+  let content;
+  if (window.clipboardData) {
+      content = window.clipboardData.getData('Text');        
+      if (window.getSelection) {
+          var selObj = window.getSelection();
+          var selRange = selObj.getRangeAt(0);
+          selRange.deleteContents();                
+          selRange.insertNode(document.createTextNode(content));
+      }
+  } else if (e.originalEvent.clipboardData) {
+      content = (e.originalEvent || e).clipboardData.getData('text/plain');
+      document.execCommand('insertText', false, content);
+  } 
+}); 
+
 $(document).on('click', '.at-btnMore', function(){
   let eleID = $(this).attr('id');
   let subText = $('.at-text_sub_section');
@@ -367,6 +413,7 @@ let doFormating = (context, param) => {
     let selected = window.getSelection();
     let a = getURL(context, selected);
     window.getSelection().getRangeAt(0).surroundContents(a);
+    converter();
   }else if(param === 'strike') {
     document.execCommand("strikeThrough");
   }else if(param === 'subscript') {
@@ -394,4 +441,54 @@ let doFormating = (context, param) => {
   }else if(param === 'redo') {
     document.execCommand("redo");
   }
+}
+
+/*===Character limit==== */
+var skipLength, textNodes;
+
+let characterCounter = (context) => {
+  $('.characterCount > .count').html($(context).text().length);
+  var element = $(context);
+  var maximumLength = element.attr("data-maxlength");
+  var currentLength = element.text().length;
+  if (currentLength > maximumLength) {
+    $('.characterCount > .count').css('color', 'red');
+    $(context).prev().html(element.html());
+    skipLength = maximumLength;
+    textNodes = [];
+    collectTextNodes($(context).prev()[0]);
+    $(textNodes).each(function() {
+      var text = highlight($(this).text());
+      $(this).replaceWith(text);
+    });
+  } else {
+    $('.characterCount > .count').css('color', '#5d5d5d');
+    $(context).prev().empty();
+  }
+}
+
+let collectTextNodes = (node) => {
+  for (var child = node.firstChild; child !== null; child = child.nextSibling) {
+    if (child.nodeType === Node.TEXT_NODE) {
+      textNodes.push(child);
+    } else if (child.nodeType === Node.ELEMENT_NODE) {
+      collectTextNodes(child);
+    }
+  }
+}
+
+let highlight = (text) => {
+  if (skipLength > 0) {
+    if (text.length <= skipLength) {
+      skipLength -= text.length;
+    } else {
+      var over = text.substr(skipLength);
+      text = text.substr(0, skipLength);
+      text += "<span class='highlight'>" + over + "</span>";
+      skipLength -= text.length;
+    }
+  } else {
+    text = "<span class='highlight'>" + text + "</span>";
+  }
+  return text;
 }
