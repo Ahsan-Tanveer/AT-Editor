@@ -242,17 +242,12 @@ class ATEditor {
 
 let converter = (context) => {
   var str = $(context).html();
-  str.replace(/&nbsp;/g, ' ');
-	str = str.replace(/\#([a-zA-Z0-9\.\-\&]+)/g, '<span class="at-hashtag">#$1</span>');
-	str = str.replace(/@(.+?)(?=[\s.,:,]|$)/g, '<span class="at-hashtag">@$1</span>');
+	str = str.replace(/\#([a-zA-Z0-9;\.\-\&]+)/g, '<span class="at-hashtag">#$1</span>');
+	str = str.replace(/\@([a-zA-Z0-9;\.\-\&]+)/g, '<span class="at-hashtag">@$1</span>');
 	//str = str.replace(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g, '<span class="at-hashtag">$1</span>');
   var ele = document.createElement('div');
   ele.id= 'at-output';
-  ele.innerHTML = str.replace('&nbsp', ' ').replace(';', '');
-  ele.innerHTML = ele.innerHTML.replace(';', '');
-  ele.innerHTML = ele.innerHTML.replace('</span>;', '</span>');
-  ele.innerHTML = ele.innerHTML.replace(';</div>', '</div>');
-  ele.innerHTML = ele.innerHTML.replace('<br>        <br>      ', '');
+  ele.innerHTML = str;
   $(ele).children('.editPopupWrapper').remove();
 	$(context).next().children('#at-output').replaceWith(ele);
 }
